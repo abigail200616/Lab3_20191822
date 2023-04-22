@@ -65,4 +65,8 @@ public class Doctor {
     public int hashCode() {
         return Objects.hash(id, nombre, especialidad, hospitalId);
     }
+
+
+
+
 }

@@ -9,20 +9,39 @@
     <title>Hospitales list</title>
 </head>
 <body>
+
+<!-- Botones-->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <!-- mx auto para centrar-->
+        <ul class="navbar-nav mx-auto ">
+            <li class="nav-item">
+                <a class="btn btn-outline-dark" th:href="@{'/doctor/lista'}" >Doctores</a>
+            </li>
+            <li class="nav-item  active">
+                <a class="btn btn-outline-dark" th:href="@{'/hospital/lista'}">Hospitales</a>
+            </li>
+            <li class="nav-item">
+                <a class="btn btn-outline-dark" th:href="@{'/paciente/lista'}">Pacientes</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
 <div class="container">
     <h2>Lista De Hospitales</h2>
     <table class="table table-sm">
         <tr>
             <th>#</th>
             <th>Nombre del Hospital</th>
-            <th></th>
-            <th></th>
+            <th>Doctores</th>
+            <th>Pacientes</th>
         </tr>
         <tr th:each="hospital,obj: ${hospitalList}">
             <td th:text="${obj.index+1}"> </td>
             <td th:text="${hospital.nombre}"></td>
-            <td><a th:href="@{'/doctoresH?id=' + ${hospital.id}}">Mostrar Doctores</a></td>
-            <td><a th:href="@{'/pacientesH?id=' + ${hospital.id}}">Mostrar Pacientes</a></td>
+            <td><a class="btn btn-outline-primary" th:href="@{'/hospital/mostrarD' + '?id=' + ${hospital.id}}">Mostrar</a></td>
+            <td><a class="btn btn-outline-primary" th:href="@{'/hospital/mostrarP' + '?id=' + ${hospital.id}}">Mostrar</a></td>
         </tr>
     </table>
 </div>

@@ -9,20 +9,40 @@
   <title>Doctores list</title>
 </head>
 <body>
+<!-- Botones-->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="navbar-collapse collapse" id="navbarNav">
+    <!-- mx auto para centrar-->
+    <ul class="navbar-nav mx-auto ">
+      <li class="nav-item">
+        <a class="btn btn-outline-dark" th:href="@{'/doctor/lista'}" >Doctores</a>
+      </li>
+      <li class="nav-item  active">
+        <a class="btn btn-outline-dark" th:href="@{'/hospital/lista'}">Hospitales</a>
+      </li>
+      <li class="nav-item">
+        <a class="btn btn-outline-dark" th:href="@{'/paciente/lista'}">Pacientes</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
 <div class="container">
   <h2>Lista De Doctores</h2>
   <table class="table table-sm">
     <tr>
       <th>#</th>
       <th>Nombre del Doctor</th>
-      <th></th>
-      <th></th>
+      <th>Hospital</th>
+      <th>Pacientes</th>
+      <th>Proximas Citas</th>
     </tr>
     <tr th:each="doctor,obj: ${doctorList}">
       <td th:text="${obj.index+1}"> </td>
-      <td th:text="${doctor.nombre}"></td>
-      <td><a th:href="@{'/pacientesD?id=' + ${doctor.id}}">Mostrar Pacientes</a></td>
-      <td><a th:href="@{'/citasD?id=' + ${doctor.id}}">Proximas Citas</a></td>
+      <td th:text="${doctor.nombre}"></td>       <!--th:text="${doctor.getNombreH}"-->
+      <td th:each="hospital : ${doctorHospital}" th:if="${hospital.id}==${doctor.hospitalId}" th:text="${hospital.nombre}" ></td>
+      <td><a class="btn btn-outline-primary" th:href="@{'/doctor/mostrarP' + '?id=' + ${doctor.id}}">Mostrar</a></td>
+      <td><a class="btn btn-outline-primary" th:href="@{'/doctor/citasP' + '?id=' + ${doctor.id}}">Mostrar</a></td>
     </tr>
   </table>
 </div>

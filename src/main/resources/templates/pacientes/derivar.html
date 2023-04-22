@@ -1,10 +1,57 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp"
+          crossorigin="anonymous">
+    <title>Derivar Pacientes</title>
 </head>
 <body>
 
+<!-- Botones-->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="navbar-collapse collapse" id="navbarNav">
+        <!-- mx auto para centrar-->
+        <ul class="navbar-nav mx-auto ">
+            <li class="nav-item">
+                <a class="btn btn-outline-dark" th:href="@{'/doctor/lista'}" >Doctores</a>
+            </li>
+            <li class="nav-item  active">
+                <a class="btn btn-outline-dark" th:href="@{'/hospital/lista'}">Hospitales</a>
+            </li>
+            <li class="nav-item">
+                <a class="btn btn-outline-dark" th:href="@{'/paciente/lista'}">Pacientes</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<main>
+    <div class="container px-4 py-5">
+        <h1 class="pb-2 mb-4 border-bottom">Derivar Pacientes</h1>
+        <form method="post" th:action="@{'/paciente/guardar2'}" class="col-4">
+            <div class="mb-3">
+                <label form="nombre" class="form-label">Derivar del Doctor</label>
+                </div>
+            <select class="form-select" id="doctor1" th:name="doctor1_id" >
+                <option th:each="doctor : ${doctoresDerivar}" th:value="${doctor.id}" th:text="${doctor.nombre}">Seleccione</option>
+            </select>
+            <br>
+            <div class="mb-3">
+                <label form="nombre" class="form-label">Al Doctor</label>
+            </div>
+            <select class="form-select" id="doctor2" th:name="doctor2_id" >
+                <option th:each="doctor : ${doctoresDerivar}" th:value="${doctor.id}" th:text="${doctor.nombre}">Seleccione</option>
+            </select>
+            <br>
+            <a th:href="@{'/paciente/lista'}" class="btn btn-danger">Cancelar</a>
+            <button type="submit" class="btn btn-primary">Actualizar</button>
+        </form>
+    </div>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N"
+        crossorigin="anonymous"></script>
 </body>
 </html>
